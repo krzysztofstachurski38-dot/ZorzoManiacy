@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>ZorzoManiacy PRO LIVE</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#050814;
+    color:white;
+    text-align:center;
+}
+
+/* MENU */
+.menu-btn{
+    position:fixed;
+    top:15px;
+    right:20px;
+    font-size:35px;
+    cursor:pointer;
+    z-index:1000;
+}
+
+.menu{
+    position:fixed;
+    top:60px;
+    right:20px;
+    background:#111a33;
+    padding:15px;
+    border-radius:10px;
+    display:none;
+    flex-direction:column;
+    gap:10px;
+    z-index:1000;
+}
+
+.menu a{
+    color:white;
+    text-decoration:none;
+    padding:8px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.menu a:hover{
+    background:#1db954;
+    color:black;
+}
+
+/* SEKCJE */
+section{
+    display:none;
+    padding:20px;
+}
+
+.active{
+    display:block;
+}
+
+/* HEADER */
+header{
+    padding:20px;
+    font-size:30px;
+    background:#0e1633;
+    font-weight:bold;
+}
+
+/* MAPA */
+.map img{
+    width:95%;
+    max-width:900px;
+    border-radius:15px;
+    margin-top:15px;
+}
+
+/* ZDJĘCIA */
+.photos{
+    margin-top:40px;
+    opacity:0.85;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MENU -->
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<div id="menu" class="menu">
+    <a onclick="show('planety')">🌌 Planety</a>
+    <a onclick="show('photos')">📸 Moje zdjęcia</a>
+</div>
+
+<header>🌌 ZorzoManiacy PRO LIVE</header>
+
+<!-- HOME -->
+<section id="home" class="active">
+
+<h2>Mapa zorzy (NOAA OVATION)</h2>
+
+<div class="map">
+<img id="auroraMap">
+</div>
+
+</section>
+
+<!-- PLANETY -->
+<section id="planety">
+
+<h2>🌌 Planety i kosmos</h2>
+
+<div class="photos">
+Tu możesz dodawać rzeczy o planetach 🚀
+</div>
+
+</section>
+
+<!-- PHOTOS -->
+<section id="photos">
+
+<h2>📸 Moje zdjęcia nocnego nieba</h2>
+
+<div class="photos">
+Tu będą Twoje zdjęcia 🌌<br><br>
+Na razie pusto 🚀
+</div>
+
+</section>
+
+<script>
+
+// MENU
+function toggleMenu(){
+    const menu = document.getElementById("menu");
+    menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+
+// SEKCJE
+function show(page){
+
+    document.getElementById("home").classList.remove("active");
+    document.getElementById("photos").classList.remove("active");
+    document.getElementById("planety").classList.remove("active");
+
+    document.getElementById(page).classList.add("active");
+
+    document.getElementById("menu").style.display = "none";
+}
+
+// MAPA LIVE
+function loadMap(){
+    document.getElementById("auroraMap").src =
+    "https://services.swpc.noaa.gov/images/animations/ovation/north/latest.jpg?ts=" + Date.now();
+}
+
+loadMap();
+setInterval(loadMap, 300000);
+
+</script>
+
+</body>
+</html>
